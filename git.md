@@ -1,63 +1,59 @@
-# GIT 48
+# GIT 
 
-##### Начало работы
+##### First steps
 
-```java
+```shell
+git config --list  #show current configs
+
+#main info
 git config --global user.name "Your Name"
 git config --global user.email "your_email@whatever.com"
 
-//Установка окончаний
-//Unix
+#set prefixes       
+
+#Unix
 git config --global core.autocrlf input
 git config --global core.safecrlf warn
 
-//Windows
+#Windows
 git config --global core.autocrlf true
 git config --global core.safecrlf warn
 
-//Установка отображения unicode
+#view of unicode
 git config --global core.quotepath off
-    
-git init  // инициализация
+
+#initialization of repository   
+git init  
 ```
 
+##### Алиасы
 
-##### Главное 
-```java
-git add   // добавление в отслеживание
-git add . // добавление текущего каталога и подкаталогов 
-git commit -m "First Commit"
-git status
-git add lib/style.css
+```shell
+#Для пользователей Windows:
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
+git config --global alias.type 'cat-file -t'
+git config --global alias.dump 'cat-file -p'
+    
+#Также, для пользователей Linux:
+#Добавьте следующее в файл .gitconfig в вашем $HOME каталоге.
+[alias]
+co = checkout
+ci = commit
+st = status
+br = branch
+hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+type = cat-file -t/
+dump = cat-file -p
+
 ```
-*Если вы опустите метку -m из командной строки, git перенесет вас в редактор по вашему выбору. Редактор выбирается из переменной среды GIT_EDITOR*
-
-
-##### Редактирование изменений
-```java
-git checkout hello.html //отмена локальных изменений (ели не было оgit add)
-    
-git reset HEAD hello.html //отмена индексации  (git add) после нее можно git checkout hello.html для отмены изменений
-    
-git revert HEAD// отмена предыдущего коммита с откатом изменений и созданием нового коммита. при этом коммит, который отменили сохраняется в истории
-    
-git reset --hard hash_name // сброс всех коммитов к конкретному ПОТЕНЦИАЛЬНО ОПАСНАЯ ОПЕРАЦИЯ
-    
-    
-git tag -d oops// просто удаление тэга
-
-    
-    
-git commit --amend -m "***" // переписать комментарий к последнему коммиту
-    
-    
-```
-
-
-##### История
-```java
+##### Логи
+```shell
 git log
-git log --pretty=oneline     /// однострочный
+git log --pretty=oneline   #однострочный
 git log --pretty=oneline --max-count=2
 git log --pretty=oneline --since='5 minutes ago'
 git log --pretty=oneline --until='5 minutes ago'
@@ -74,199 +70,59 @@ git log --all --pretty=format:"%h %cd %s (%an)" --since='7 days ago'
 --graph — отображает дерево коммитов в виде ASCII-графика
 --date=short — сохраняет формат даты коротким и симпатичным
 
- git hist --all //Метка --all гарантированно означает, что мы видим все ветки. По умолчанию показывается только текущая ветка. Добавление опции --graph в git log вызывает построение дерева коммитов с помощью простых ASCII символов. Мы видим обе ветки (style и master), и то, что ветка master является текущей HEAD.
+git hist --all #Метка --all  означает, что мы видим все ветки. По умолчанию только текущая ветка. Добавление опции --graph в git log вызывает построение дерева коммитов с помощью простых ASCII символов.
     
-    
-    
-git hist --max-count=1 // вывод последнего коммита
+git hist --max-count=1 # вывод последнего коммита
 git cat-file -t <hash>
 git cat-file -p <hash>
 git cat-file -p <treehash>
 git cat-file -p <libhash>
 git cat-file -p <hellohash>
-
-git cat-file -p <treehash> // вывод дерева каталогов
-git cat-file -p <hellohash> //
-    
-
-```
-
-
-##### Алиасы
-
-*Для пользователей Windows:*
-
-```java
-git config --global alias.co checkout
-git config --global alias.ci commit
-git config --global alias.st status
-git config --global alias.br branch
-git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
-git config --global alias.type 'cat-file -t'
-git config --global alias.dump 'cat-file -p'
-    
-    //Добавление опции --graph в git log вызывает построение дерева коммитов с помощью простых ASCII символов ДЛЯ ВСЕХ ВЕТОК
-```
-
-*Также, для пользователей Unix/Mac:*
-*Добавьте следующее в файл .gitconfig в вашем $HOME каталоге.*
-
-
-
-```java
-[alias]
-co = checkout
-ci = commit
-st = status
-br = branch
-hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-type = cat-file -t/
-dump = cat-file -p
-```
-
-##### Хэши
-
-```java
-//переход по хэшам коммитов
-git checkout <hash>
-//посмотреть файл
-cat hello.html
-// вернуться к последней версии в ветке master    
-git checkout master
-  
-    
-//ПЕРЕМЕЩЕНИЯ ПО ХЭШАМ
-git hist --max-count=1 //Поиск последнего коммита
-    
-git cat-file -t <hash> // Вывод последнего коммита
-git cat-file -p <hash> // Вывод последнего коммита
-    
-git cat-file -p <treehash> // вывод дерева хэшей
-git cat-file -p <folderhash>  // вывод каталога какого-нибудь
-git cat-file -p <filehash> // вывод файла
+git cat-file -p <treehash> # вывод дерева каталогов
+git cat-file -p <hellohash>
 
 
 ```
 
+##### Main Activty
 
-##### Тэги версий
+```shell
+git add                           #добавление в отслеживание
+git add .                         #добавление текущего каталога и подкаталогов 
+git commit -m "First Commit"      #Если опустите метку -m, git перенесетс в редактор из переменной среды GIT_EDITOR
+git status
+git add lib/style.css
+git add -u                         # принять все изменения
 
-```java
-//показать все тэги
-git tag
-//создать тэг
-git tag v1
-//«родитель v1» - «первая версия, предшествующая v1».
-git checkout v1^  // почему-то не хочет работать
-//то же самое
-git checkout v1~1 // работает
-//показатоь все тэги в логах
-git hist master --all
+
 
 ```
-
-
 
 ##### Ветки
-```java
-git checkout -b new_branch_name  // создать новую
-git checkout branch_name  //  переключиться на ветку
 
-/*git checkout -b <имяветки> является шорткатом для git branch <имяветки> за которым идет git checkout <имяветки>.*/
+```shell
+# HEAD  - указатель на ветку в которой находимся
+
+git checkout -b <branch_name>        #создать новую
+git checkout <branch_name>           #переключиться на ветку
+git branch -D <branch_name>
+git push origin --delete <branch_name> #удалить на сервере
+
+#git checkout -b <имяветки> является шорткатом для git branch <имяветки> за которым идет git checkout <имяветки>.
  
-git branch -a // показать все ветки, в том числе удаленные
+git branch -a                        #показать все ветки, в том числе удаленные
     
     
-//СЛИЯНИЕ ВЕТОК
+#СЛИЯНИЕ ВЕТОК
 git checkout style
 git merge master
     
-//Перебазирование как альтернатива слиянию
+#Перебазирование как альтернатива слиянию
 git rebase master
- /*Слияние VS перебазирование
-Конечный результат перебазирования очень похож на результат слияния. Ветка style в настоящее время содержит все свои изменения, а также все изменения ветки master. Однако, дерево коммитов значительно отличается. Дерево коммитов ветки style было переписано таким образом, что ветка master является частью истории коммитов. Это делает цепь коммитов линейной и гораздо более читабельной.
-
-Когда использовать перебазирование, а когда слияние?
-Не используйте перебазирование …
-Если ветка является публичной и расшаренной. Переписывание общих веток будет мешать работе других членов команды.
-Когда важна точная история коммитов ветки (так как команда rebase переписывает историю коммитов).
-Учитывая приведенные выше рекомендации, я предпочитаю использовать rebase для кратковременных, локальных веток, а слияние для веток в публичном репозитории.
-*/
-```
+#Слияние VS перебазирование. конечный результат перебазирования очень похож на результат слияния. Ветка style в настоящее время содержит все свои изменения, а также все изменения ветки master. Однако, дерево коммитов значительно отличается. Дерево коммитов ветки style было переписано таким образом, что ветка master является частью истории коммитов. Это делает цепь коммитов линейной и гораздо более читабельной.
+#Когда использовать перебазирование, а когда слияние? Не используйте перебазирование Если ветка является публичной и расшаренной. Переписывание общих веток будет мешать работе других членов команды. Когда важна точная история коммитов ветки (так как команда rebase переписывает историю коммитов). Учитывая приведенные выше рекомендации, я предпочитаю использовать rebase для кратковременных, локальных веток, а слияние для веток в публичном репозитории.
 
 
-
-##### Перемещение файлов
-```java
-	//1й способ
-	mkdir lib
-	git mv hello.html lib
-	git status
-
-	//2й способ
-	mkdir lib
-	mv hello.html lib
-	git add lib/hello.html
-	git rm hello.html
-
-
-```
-
-
-
-##### Репозитории
-
-
-
-```java
-git clone hello cloned_hello// клонирование репозиторя
-git remote// имя удаленного репзитория по умолчанию
-git remote show origin//  детальная информация 
-
-git fetch// будет извлекать новые коммиты из удаленного репозитория, но не будет сливать их с вашими наработками в локальных ветках.
-git merge origin/master//слить извлеченные изменения
-//git pull эквивалентна комбинации git fetch и git merge.
-    
-    
-//локальную ветку, которая отслеживает изменения удаленной ветки.
-git branch --track style origin/style
-    
-//ЧИСТЫЕ РЕПОЗИТОРИИ    
- git clone --bare hello hello.git
-/*
-Чистые репозитории (без рабочих каталогов) обычно используются для расшаривания.
-Обычный git-репозиторий подразумевает, что вы будете использовать его как рабочую директорию, поэтому вместе с файлами проекта в актуальной версии, git хранит все служебные, «чисто-репозиториевские» файлы в поддиректории .git. В удаленных репозиториях нет смысла хранить рабочие файлы на диске (как это делается в рабочих копиях), а все что им действительно нужно — это дельты изменений и другие бинарные данные репозитория.
-Как правило, репозитории, оканчивающиеся на «.git» являются чистыми репозиториями. Мы видим, что в репозитории hello.git нет рабочего каталога. По сути, это есть не что иное, как каталог .git нечистого репозитория.
-*/
-//Добавление удаленного репозитория    
-git remote add shared ../hello.git
-```
-
-
-
-#####  Без пароля
-git config credential.helper store
-git push https://github.com/AlexanderGulevich/komfort.git/ 
-git push https://github.com/AlexanderGulevich/pricehandler.git/
-
-
-##### ssh
-ssh-keygen -t rsa -b 4096 -C "iscander_02@mail.ru"
-eval $(ssh-agent -s)
-ssh-add ~/.ssh/Alexey
-//добавка в агент
-ssh-add ~/.ssh/id_rsa           // без PUB
-ls -al ~/.ssh   // список ssh
-ssh -T git@github.com  // привет юзер
-
-
-git config --global user.email "you@example.com"
-git config --global user.name "Ваше Имя"
-
-
-
-
-git add -u   ///// принять все изменения
 
 
 
@@ -277,28 +133,8 @@ git remote rm origin
 
 
 
- git config --list
-$ git status
 
 
-ветки
-
-HEAD  - указатель на ветку в которой находимся
-удаление
-git branch -D <branch_name>
-git push origin --delete <branch_name>
-
-создание
-git branch testing         === создание
-git checkout testing     === переключение на существующую ветку
-логи
-git log --oneline --decorate        ===в какой ветке находимся
-
-
-f30ab (HEAD, master, testing) add feature #32 - ability to add new
-34ac2 fixed bug #1328 - stack overflow under certain conditions
-98ca9 initial commit of my project
-           Видны ветки “master” и “testing”, которые указывают на коммит f30ab.
 
 
 git remote show rem
@@ -308,31 +144,24 @@ git log --oneline --decorate --graph --all    === полный граф вето
 
 Создание ветки локально и размещение в гитхабе
 git push -u origin price
-
-
 git checkout -b AlexeyBranch   === создали и сразу перешли
-
 git push rem AlexeyBranch
 
-Сделать старый коммит в ветке коммитом  HEAD
-git checkout <branch-to-modify-head>
- git reset --hard <commit-hash-id-to-put-as-head> 
-git push -f
 
 
-$ git branch -v
-$ git checkout origin/roll
-$ git checkout master
-$ git branch --no--merged
-$ git branch -a  // показать ветки
-$ git branch --merged
-$ git branch -d lOrderRoll
-$ git checkout master
-$ git branch -D lRoll      //Deleted branch lRoll (was 09ba3aa).
-$ git checkout -b roll origin/roll       //Branch roll set up to track remote branch roll from origin.
-$ git checkout -b rollOrder origin/rollOrder //Branch rollOrder set up to track remote branch rollOrder from origin.
-$ git checkout roll
-$ git merge rollOrder
+git branch -v
+git checkout origin/roll
+git checkout master
+git branch --no--merged
+git branch -a  // показать ветки
+git branch --merged
+git branch -d lOrderRoll
+git checkout master
+git branch -D lRoll      //Deleted branch lRoll (was 09ba3aa).
+git checkout -b roll origin/roll       //Branch roll set up to track remote branch roll from origin.
+git checkout -b rollOrder origin/rollOrder //Branch rollOrder set up to track remote branch rollOrder from origin.
+git checkout roll
+git merge rollOrder
 
 Отслеживание
 git branch -f --track $BRANCH origin/$BRANCH
@@ -340,7 +169,6 @@ git push origin $BRANCH
 
 
 
-$ git checkout --    // откатить изменения до последнего коммита
 
 
 $ git pull --all  
@@ -384,65 +212,109 @@ git remote rm origin     === удалить ссылку
 
 
 
-mkdir     cd hello  // Создание директории
-touch  hello.html  // Создание файла
- cd ../
-git init      //  создает репозиторий
-git add hello.html    //добавляет файл в репозиторий   
-git commit -m "my first commit"      //коммит
-git сheckout  //  отмена изменений
-git add   // добавление изменений в репозиторий
+```
+
+
+##### Редактирование изменений
+```shell
+git checkout hello.html       #отмена локальных изменений (ели не было оgit add)
+git reset HEAD hello.html     #отмена индексации  (git add) после нее можно git checkout hello.html для отмены изменений
+git revert HEAD               #отмена предыдущего коммита с откатом изменений и созданием нового коммита. при этом коммит, который отменили сохраняется в истории
+git reset --hard hash_name    #сброс всех коммитов к конкретному ПОТЕНЦИАЛЬНО ОПАСНАЯ ОПЕРАЦИЯ
+git tag -d oops               #просто удаление тэга
+git commit --amend -m "***"   #переписать комментарий к последнему коммиту
+git checkout --               #откатить изменения до последнего коммита
+```
+
+##### История
+```shell
+
+
+# Тэги версий
+git tag              #показать все тэги
+git tag v1           #создать тэг
+git checkout v1~1 // родитель тега v1
+git hist master --all  #показатоь все тэги в логах
 
 
 
+# Хэши
 
-
-
-
-
-git config --global user.name "Your Name"
-git config --global user.email "your_email@whatever.com"
-git config --global core.autocrlf true
-git config --global core.safecrlf true
-
-история коммитов
-git log
-git log --pretty=oneline
-git log --pretty=oneline --max-count=2
-git log --pretty=oneline --since='5 minutes ago'
-git log --pretty=oneline --until='5 minutes ago'
-git log --pretty=oneline --author=<your name>
-git log --pretty=oneline --all
-git log --all --pretty=format:"%h %cd %s (%an)" --since='7 days ago'
-git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
-
-    • --pretty="..." — определяет формат вывода.
-    • %h — укороченный хэш коммита
-    • %d — дополнения коммита («головы» веток или теги)
-    • %ad — дата коммита
-    • %s — комментарий
-    • %an — имя автора
-    • --graph — отображает дерево коммитов в виде ASCII-графика
-    • --date=short — сохраняет формат даты коротким и симпатичным
-алиасы
-git config --global alias.co checkout
-git config --global alias.ci commit
-git config --global alias.st status
-git config --global alias.br branch
-git config --global alias.hist "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
-git config --global alias.type 'cat-file -t'
-git config --global alias.dump 'cat-file -p'
-
-
-heroku
-https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app
-
- 
-
-
-
-
+git checkout <hash>          #переход по хэшам коммитов
+cat hello.html               #посмотреть файл
+git checkout master          #вернуться к последней версии в ветке master  
+  
+git hist --max-count=1       #Поиск последнего коммита
+    
+git cat-file -t <hash>       #Вывод последнего коммита
+git cat-file -p <hash>       #Вывод последнего коммита
+    
+git cat-file -p <treehash>   #вывод дерева хэшей
+git cat-file -p <folderhash> #вывод каталога какого-нибудь
+git cat-file -p <filehash>   #вывод файла
 
 ```
 
+##### Репозитории
+```shell
+git clone hello cloned_hello      # клонирование репозиторя
+git remote                        # имя удаленного репзитория по умолчанию
+git remote show origin            # детальная информация 
+
+git fetch                         # будет извлекать новые коммиты из удаленного репозитория, но не будет сливать их с вашими наработками в локальных ветках.
+git merge origin/master           # слить извлеченные изменения
+
+git pull                          # эквивалентна комбинации git fetch и git merge.
+    
+    
+# локальную ветку, которая отслеживает изменения удаленной ветки.
+git branch --track style origin/style
+    
+
+# ЧИСТЫЕ РЕПОЗИТОРИИ    
+
+git clone --bare hello hello.git  #create pure repository
+
+git remote add shared ../hello.git   # Добавление удаленного репозитория 
+
+git push shared master  #отправка изменений в общий репозиторий
+
+git branch --track shared master # отслеживание изменений
+
+#Чистые репозитории (без рабочих каталогов) исп для расшаривания. Обычный git-репозиторий подразумевает, что вы будете использовать его как рабочую директорию, поэтому вместе с файлами проекта в актуальной версии, git хранит все служебные, «чисто-репозиториевские» файлы в поддиректории .git. В удаленных репозиториях нет смысла хранить рабочие файлы на диске, а все что им нужно — это дельты изменений и другие бинарные данные. Как правило, репозитории, оканчивающиеся на «.git» являются чистыми репозиториями. 
+   
 ```
+
+
+#####  Без пароля git config credential.helper store
+```shell
+git push https://github.com/name/repo.git/ 
+```
+
+##### ssh
+```shell
+ssh-keygen -t rsa -b 4096 -C "XXXXX_@mail.XX"
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/Name
+//добавка в агент
+ssh-add ~/.ssh/id_rsa           // без PUB
+ls -al ~/.ssh   // список ssh
+ssh -T git@github.com  // привет юзер
+```
+
+##### Перемещение файлов
+```shell
+	//1й способ
+	mkdir lib
+	git mv hello.html lib
+	git status
+
+	//2й способ
+	mkdir lib
+	mv hello.html lib
+	git add lib/hello.html
+	git rm hello.html
+
+```
+
+

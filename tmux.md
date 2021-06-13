@@ -2,77 +2,49 @@
 __---  Ctrl + b ? --- shortcuts__
 
 
-#######################################################
-## Sessions
-#######################################################
+### Sessions
 
-##### start session
-tmux || tmux new || tmux new -s mysession  
-###### kill/delete session
-tmux kill-session -t mysession
-###### kill/delete session but the current
-tmux kill-session -a
-##### Rename session
-Ctrl + b $
-##### Detach from session
-Ctrl + b d
-##### Show all sessions
-Ctrl + b s
-##### Move to next session
-Ctrl + b (  )
+Commands |  Actions
+--|--
+tmux | start session
+tmux kill-session -t mysession  | kill/delete session
+tmux kill-session -a  | kill ses but the current
+Ctrl + b $ | Rename session
+Ctrl + b d | Detach from session
+Ctrl + b s  | Show all sessions
+Ctrl + b (  )  | Move to next session
 
-#######################################################
-## Windows
-#######################################################
+### Windows
 
-###### Create window
-Ctrl + b c
-###### Rename current window
-Rename current window
-###### Close
-Ctrl + b &
-###### Previous
-Ctrl + b p
-##### Nex 
-Ctrl + b n
-##### Switch
-Ctrl + b  0-9
+Commands |  Actions
+--|--
+Ctrl + b c | Create window
+Ctrl + b & | Close
+Ctrl + b p | Previous
+Ctrl + b n | Next 
+Ctrl + b  0-9| Switch
 
-#######################################################
-## Panes
-#######################################################
+### Panes
 
-##### Split
-Ctrl + b "
-Ctrl + b %
-##### Move
-Ctrl + b {    }
-##### Switch 
-Ctrl + b     -> <- 
-Ctrl + b     0-9
-##### Number
-Ctrl + b q
-##### Pane zoom
-Ctrl + b z
-##### Conwert to window 
-Ctrl + b !
-##### Resize 
-Ctrl + b  Ctrl + <-- -->
-##### Close
-Ctrl + b x
+Commands |  Actions
+--|--
+Ctrl + b "   Ctrl + b % | Split
+Ctrl + b {    } | Move
+Ctrl + b     -> <- | Switch 
+Ctrl + b q | Number
+Ctrl + b z | Pane zoom
+Ctrl + b ! | Conwert to window 
+Ctrl + b  Ctrl + <-- --> | Resize 
+Ctrl + b x | Close
 
-#######################################################
-## Copy mode   (LIKE VIM)	
-#######################################################
- 
-##### Start
-Ctrl + b [
-##### Scroll
-Ctrl + b PgUp
-##### Quite
-q
-##### Go to top/bottom line
-g/G
+### Copy mode   (LIKE VIM)	
+
+Commands |  Actions
+--|--
+Ctrl + b [ | Start
+Ctrl + b PgUp |  Scroll
+q | Quite
+g/G | Go to top/bottom line
 
 
 
